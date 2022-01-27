@@ -54,6 +54,11 @@ const styles = (theme) =>
 			{
 				objectFit       : 'contain',
 				backgroundColor : 'rgba(0, 0, 0, 1)'
+			},
+			'&.noControlsOnFullScreen' : {
+				'&::-webkit-media-controls' : {
+					display : 'none !important'
+				}
 			}
 		},
 		info :
@@ -450,7 +455,6 @@ class VideoView extends React.PureComponent
 					autoPlay
 					playsInline
 					muted
-					controls={false}
 				/>
 				}
 				{isVod &&
@@ -458,9 +462,12 @@ class VideoView extends React.PureComponent
 						ref='videoElement'
 						id='vod_video'
 						preload='auto'
-						className={classnames(classes.video, {
-							contain : videoContain
-						})}
+						className={classnames(
+							classes.video,
+							{
+								contain                : videoContain,
+								noControlsOnFullScreen : !isMe
+							})}
 						playsInline
 					/>
 				}
